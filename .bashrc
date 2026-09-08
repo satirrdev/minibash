@@ -130,6 +130,28 @@ fi
 bash .local/share/satirfetch/start.sh
 
 # ==========================================================
+#                    AUTO-INSTALL DEPENDENCIES
+# ==========================================================
+
+if [[ $- == *i* ]]; then
+    REQUIRED_PKGS=(tmux mpv yt-dlp cava pulseaudio proot-distro)
+    MISSING_PKGS=()
+
+    for pkg in "${REQUIRED_PKGS[@]}"; do
+        if ! command -v "$pkg" >/dev/null 2>&1; then
+            MISSING_PKGS+=("$pkg")
+        fi
+    done
+
+    if [ ${#MISSING_PKGS[@]} -gt 0 ]; then
+        printf "\n${YELLOW}[!] Paket belum lengkap: ${MISSING_PKGS[*]}${RESET}\n"
+        printf "${CYAN}Menginstall paket yang kurang, tunggu bentar...${RESET}\n\n"
+        pkg update -y && pkg install -y "${MISSING_PKGS[@]}"
+        printf "\n${GREEN}✓ Semua dependensi beres diinstall.${RESET}\n\n"
+    fi
+fi
+
+# ==========================================================
 #                    RANDOM MOTD
 # ==========================================================
 
