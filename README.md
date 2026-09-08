@@ -27,8 +27,7 @@ A Fine tuned .bashrc with Self Made Fetch and trace tracker. Just for Termux
 ```bash
 git clone https://github.com/satirrdev/minibash.git
 cd minibash
-source ~/minibash/.bashrc
-chmod +x ~/minibash/satirfetch/start.sh
+bash setup.sh
 ```
 
 ## Usage
